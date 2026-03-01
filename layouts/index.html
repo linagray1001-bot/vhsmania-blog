@@ -1,0 +1,19 @@
+{{ define "main" }}
+<section class="hero-retro">
+    <h1>{{ .Site.Title }}</h1>
+    <p>{{ .Site.Params.description }}</p>
+</section>
+<section class="feed">
+    {{ range first 12 (where .Site.RegularPages "Section" "posts") }}
+    <article class="entry">
+        {{ with .Params.image }}<img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">{{ end }}
+        <div class="entry-info">
+            <time>{{ .Date.Format "Jan 02, 2006" }}</time>
+            {{ range first 2 .Params.tags }}<span class="badge">{{ . }}</span>{{ end }}
+        </div>
+        <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+        <p>{{ .Summary | truncate 110 }}</p>
+    </article>
+    {{ end }}
+</section>
+{{ end }}
