@@ -1,0 +1,15 @@
+{{ define "main" }}
+<section class="feed">
+    <h1>{{ .Title | default "Archive" }}</h1>
+    {{ range .Paginator.Pages }}
+    <article class="entry">
+        {{ with .Params.image }}<img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">{{ end }}
+        <div class="entry-info">
+            <time>{{ .Date.Format "Jan 02, 2006" }}</time>
+        </div>
+        <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    </article>
+    {{ end }}
+    {{ template "_internal/pagination.html" . }}
+</section>
+{{ end }}
